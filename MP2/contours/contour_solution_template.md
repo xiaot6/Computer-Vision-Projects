@@ -63,8 +63,10 @@
 4. **Visualizations.** *TODO:* Include visualization on 3 images (before and after the contour detection). Comment on
    your observations, where does your contour detector work well, where it doesn't and why? you can are also add visualizations of your own images.
    <div align="center">
-      <img src="197017.jpg" width="35%" style="margin:10px;">
-      <img src="197017.png" width="35%" style="margin:10px;">
+      <img src="./data/val/images/37073.jpg" width="30%" style="margin:10px;">
+      <img src="./output/part1/bench/37073.jpg" width="30%" style="margin:10px;">
+      <img src="./output/demo/bench/37073.jpg" width="30%" style="margin:10px;">
+
    </div>
 
 5. **Bells and Whistles.** *TODO*: Include details of the bells and whistles that you
