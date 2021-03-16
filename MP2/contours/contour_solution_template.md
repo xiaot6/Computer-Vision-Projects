@@ -2,7 +2,27 @@
 
 **NOTE:** All values and figures in this template are examples that you will need to replace with your own results
 
-1. **Method Description.** *TODO*: Describe the different mehtods and their key implementation detials.
+1. **Method Description.: Describe the different mehtods and their key implementation detials.
+   **Warm up**:
+   I use the signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]),mode='same', boundary = 'symm'). 
+   I changed the boundary function into "symm", which means symmetrical boundary conditions.
+   **Smoothing**:
+   We  smooth the image so that we can reduce the amount of edges detected from the noise and apply a low-pass filter.
+   In my applications, I firstly use GaussianBlur function to get the blur image. 
+   ```
+   I = cv2.GaussianBlur(I, (7,7),2)
+   ```
+   Also, I use derivative of Gaussian filters to obtain more robust estimates of the gradient:
+   ```
+   dx = signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]),mode='same', boundary = 'symm')
+   dy = signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]).T,mode='same', boundary = 'symm')
+   ```
+   Then, for the filter, I change the [−1, 0, 1] to np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]) for better results.
+   **Non-maximum Suppression**:
+
+
+
+
 
 2. **Precision Recall Plot.** *TODO*: Use [contour_plot.py](contours/../contour_plot.py) to add curves for the different methods that you implemented into a single plot.
    
