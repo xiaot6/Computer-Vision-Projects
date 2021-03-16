@@ -21,6 +21,8 @@ flags.DEFINE_string("imset", "val",
                     "Image set to use for testing")
 flags.DEFINE_string("imname", "draw_cube_17", 
                     "Image set to use for testing")
+# flags.DEFINE_string("imname", "draw_cube_18", 
+#                     "Image set to use for testing")
 flags.DEFINE_float("vis_thresh", 0.1*255, 
                     "Threshold value for visualization")
 
