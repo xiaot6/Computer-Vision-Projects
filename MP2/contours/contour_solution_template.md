@@ -2,11 +2,18 @@
 
 **NOTE:** All values and figures in this template are examples that you will need to replace with your own results
 
-1. **Method Description.: Describe the different mehtods and their key implementation detials.
+1. **Method Description.**: Describe the different mehtods and their key implementation detials.
+
    **Warm up**:
-   I use the signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]),mode='same', boundary = 'symm'). 
+   
+   I use the spicy.
+   ```
+   spicy.signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]),mode='same', boundary = 'symm'). 
+   ```
    I changed the boundary function into "symm", which means symmetrical boundary conditions.
+
    **Smoothing**:
+
    We  smooth the image so that we can reduce the amount of edges detected from the noise and apply a low-pass filter.
    In my applications, I firstly use GaussianBlur function to get the blur image. 
    ```
@@ -18,7 +25,9 @@
    dy = signal.convolve2d(I,np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]).T,mode='same', boundary = 'symm')
    ```
    Then, for the filter, I change the [−1, 0, 1] to np.array([[-1,0, 1],[-4,0,4],[-1,0,1]]) for better results.
+
    **Non-maximum Suppression**:
+
 
 
 
