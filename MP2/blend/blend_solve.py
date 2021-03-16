@@ -57,8 +57,8 @@ def get_Gaussian_Stack(iimg, N, alpha):
 
 def blend(left, right, mask):
 
-    N = 5
-    alpha = 4
+    N = 4
+    alpha = 3
 
     left = left/255.
     left = color.rgb2gray(left)
