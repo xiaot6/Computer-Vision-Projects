@@ -64,8 +64,8 @@
    your observations, where does your contour detector work well, where it doesn't and why? you can are also add visualizations of your own images.
    <div align="center">
       <img src="./data/val/images/37073.jpg" width="30%" style="margin:10px;">
-      <img src="./output/part1/bench/37073.jpg" width="30%" style="margin:10px;">
-      <img src="./output/demo/bench/37073.jpg" width="30%" style="margin:10px;">
+      <img src="./output/part1/bench/37073.png" width="30%" style="margin:10px;">
+      <img src="./output/demo/bench/37073.png" width="30%" style="margin:10px;">
 
    </div>
 
