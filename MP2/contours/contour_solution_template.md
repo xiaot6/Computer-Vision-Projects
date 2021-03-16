@@ -60,7 +60,7 @@
    | Non-max suppression | 0.611799|0.633582 | 0.605676| 0.9 |
    | Test set numbers of best model [From gradescope] | 0.611799|0.633582 | 0.605676| 0.9 |
 
-4. **Visualizations.** *TODO:* Include visualization on 3 images (before and after the contour detection). Comment on
+4. **Visualizations.**  Include visualization on 3 images (before and after the contour detection). Comment on
    your observations, where does your contour detector work well, where it doesn't and why? you can are also add visualizations of your own images.
    <div align="center">
       <img src="./data/val/images/37073.jpg" width="40%" style="margin:10px;">
@@ -82,12 +82,11 @@
 5. **Bells and Whistles.** *TODO*: Include details of the bells and whistles that you
    tried here.
 
-   *TODO*: Present the performance metrics for the bells and whistles in a table format
+   : Present the performance metrics for the bells and whistles in a table format
    
    | Method | overall max F-score | average max F-score | AP | Runtime (seconds) |
    | ----------- | --- | --- | ---  | --- |
    | Best base Implementation (from above) | 0.611799|0.633582 | 0.605676| 0.9 |
-   | Bells and whistle (1) The fuunction cv2.GaussianBlur()) can help us to get better  smoothing. 
-   At the beginning, I tried the convolve2d(I, gaussian_kernel, mode='same') for the blur, but the cv2.GaussianBlur() generate better results. | 0.561299| 0.580326|  0.401368| 0.191497 |
+   | Bells and whistle (1) The fuunction cv2.GaussianBlur()) can help us to get better  smoothing. At the beginning, I tried the convolve2d(I, gaussian_kernel, mode='same') for the blur, but the cv2.GaussianBlur() generate better results. | 0.561299| 0.580326|  0.401368| 0.191497 |
    | Bells and whistle (2) The improvement of NMS in all directions. Instead of comparing with the 4 neighbour pixels, or the eight neighbor pixels, I also introduce the alpha here, so that we can have the accuracy to 360 degrees, which can generate more accurate resulys for comparing. For instance: it can be the combinayion of both pixel [i + 1, j + 1] and pixel [i, j + 1] ) | 0.576145  | 0.599183  | 0.379651  |0.288801 |
    | Bells and whistle (n) difference start filter. The original filter is the [−1, 0, 1] after GaussianBlur. However, we can change it into np.array([[-1,0, 1],[-4,0,4],[-1,0,1]], np.array([[-1,0, 1],[-3,0,3],[-1,0,1]]) or np.array([[-3,0, 3],[-10,0,10],[-3,0,3]], so that we can find out the differences between colors more clear | 0.611799|0.633582 | 0.605676| 0.9 |
