@@ -66,15 +66,15 @@ for x in range(0,N):
 
 N = 5 and alpha = 4
    <div align="center">
-      <img src="./result1.png" width="100%">
+      <img src="./result1.png" width="51%">
    </div>
 N = 4 and alpha = 4
    <div align="center">
-      <img src="./result2.png" width="100%">
+      <img src="./result2.png" width="51%">
    </div>
 N = 4 and alpha = 3
    <div align="center">
-      <img src="./result3.png" width="100%">
+      <img src="./result3.png" width="51%">
    </div>
 
 3. **Blends of your choice.** *TODO:* Include visualizations of blends of your choice (include both original images and the blended image). Describe any modifications you made on top of what worked for the oraple.
