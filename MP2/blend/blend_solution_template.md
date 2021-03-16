@@ -78,3 +78,17 @@ N = 4 and alpha = 3
    </div>
 
 3. **Blends of your choice.** *TODO:* Include visualizations of blends of your choice (include both original images and the blended image). Describe any modifications you made on top of what worked for the oraple.
+
+**The original picture is:**
+
+   <div align="center">
+      <img src="city.JPG" width="40%">
+      <img src="comet.JPG" width="40%">
+   </div>
+
+**The results:**
+
+
+   <div align="center">
+      <img src="./result_own.png" width="51%">
+   </div>

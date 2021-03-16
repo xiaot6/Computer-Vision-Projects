@@ -59,6 +59,21 @@ def blend(left, right, mask):
 
     N = 4
     alpha = 3
+    # l1, l2, l3 = left.shape
+    # r1, r2, r3 = right.shape
+
+    # if l1 < r1:
+    #     right = right[-l1:, :, :]
+    # elif l1 > r1:
+    #     left = left[-r1:, :, :]
+
+    # if l2 < r2:
+    #     right = right[:, 0:l2, :]
+    # elif l2 > r2:
+    #     left = left[:, 0:r2, :]
+    # print(left.shape)
+    # print(right.shape)
+    print(mask.shape)
 
     left = left/255.
     left = color.rgb2gray(left)
