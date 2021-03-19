@@ -59,25 +59,23 @@ def blend(left, right, mask):
 
     N = 4
     alpha = 3
-    # l1, l2, l3 = left.shape
-    # r1, r2, r3 = right.shape
+
+    # print(mask.shape)
+    # l1 = left.shape[0]
+    # l2 = left.shape[1]
+
+    # r1 = right.shape[0]
+    # r2 = right.shape[1]
 
     # if l1 < r1:
-    #     right = right[-l1:, :, :]
-    # elif l1 > r1:
-    #     left = left[-r1:, :, :]
+    #     right = right[:l]
 
-    # if l2 < r2:
-    #     right = right[:, 0:l2, :]
-    # elif l2 > r2:
-    #     left = left[:, 0:r2, :]
-    # print(left.shape)
-    # print(right.shape)
-    print(mask.shape)
 
     left = left/255.
     left = color.rgb2gray(left)
     left_lstack = get_Laplacian_Stack(left, N)
+
+
 
     right = right/255.
     right = color.rgb2gray(right)
@@ -98,6 +96,7 @@ def blend(left, right, mask):
         blend += left + right
 
     return blend  * 255.
+
 
     
 

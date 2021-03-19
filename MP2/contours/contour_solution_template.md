@@ -55,20 +55,32 @@
    | Method | overall max F-score | average max F-score | AP | Runtime (seconds) |
    | ----------- | --- | --- | ---  | --- |
    | Initial implementation | 0.52 | 0.56 | 0.43 | 0.008 |
-   | Warm-up [remove boundary artifacts | 0.559771| 0.584352| 0.259602| 0.245163|
-   | Smoothing | 0.561291  | 0.583706  | 0.401346  | 0.301801|
-   | Non-max suppression | 0.611799|0.633582 | 0.605676| 0.9 |
-   | Test set numbers of best model [From gradescope] | 0.611799|0.633582 | 0.605676| 0.9 |
+   | Warm-up [remove boundary artifacts | 0.538742| 0.574959| 0.491509| 0.013049|
+   | Smoothing | 0.605989  | 0.619656  | 0.571090  | 0.019512|
+   | Non-max suppression | 0.610538|0.632524 | 0.603645| 2.103400 |
+   | Test set numbers of best model [From gradescope] | 0.611799|0.633582 | 0.605676| 2.106341 |
 
 4. **Visualizations.**  Include visualization on 3 images (before and after the contour detection). Comment on
    your observations, where does your contour detector work well, where it doesn't and why? you can are also add visualizations of your own images.
    <div align="center">
       <img src="./data/val/images/37073.jpg" width="40%" style="margin:10px;">
       <img src="./output/demo/bench/37073.png" width="40%" style="margin:10px;">
+      <img src="./output/part1/bench/37073.png" width="40%" style="margin:10px;">
+      <img src="./output/part2/bench/37073.png" width="40%" style="margin:10px;">
+      <img src="./output/part3/bench/37073.png" width="40%" style="margin:10px;">
+      <img src="./output/part4/bench/37073.png" width="40%" style="margin:10px;">
       <img src="./data/val/images/108005.jpg" width="40%" style="margin:10px;">
       <img src="./output/demo/bench/108005.png" width="40%" style="margin:10px;">
+      <img src="./output/part1/bench/108005.png" width="40%" style="margin:10px;">
+      <img src="./output/part2/bench/108005.png" width="40%" style="margin:10px;">
+      <img src="./output/part3/bench/108005.png" width="40%" style="margin:10px;">
+      <img src="./output/part4/bench/108005.png" width="40%" style="margin:10px;">
       <img src="./data/val/images/253027.jpg" width="40%" style="margin:10px;">
       <img src="./output/demo/bench/253027.png" width="40%" style="margin:10px;">
+      <img src="./output/part1/bench/253027.png" width="40%" style="margin:10px;">
+      <img src="./output/part2/bench/253027.png" width="40%" style="margin:10px;">
+      <img src="./output/part3/bench/253027.png" width="40%" style="margin:10px;">
+      <img src="./output/part4/bench/253027.png" width="40%" style="margin:10px;">
    </div>
    The contour detector work well when the color differences are obvious. For instance, the strips of the zebras, the strips of the tiger. 
    
@@ -79,14 +91,14 @@
    The reason for this is that it is even hard for the human beings to draw the contour since the noise in color are obvious.
 
 
-5. **Bells and Whistles.** *TODO*: Include details of the bells and whistles that you
+5. **Bells and Whistles.** : Include details of the bells and whistles that you
    tried here.
 
    : Present the performance metrics for the bells and whistles in a table format
    
    | Method | overall max F-score | average max F-score | AP | Runtime (seconds) |
    | ----------- | --- | --- | ---  | --- |
-   | Best base Implementation (from above) | 0.611799|0.633582 | 0.605676| 0.9 |
-   | Bells and whistle (1) The fuunction cv2.GaussianBlur()) can help us to get better  smoothing. At the beginning, I tried the convolve2d(I, gaussian_kernel, mode='same') for the blur, but the cv2.GaussianBlur() generate better results. Also, we can adjust the number in the GaussianBlur. I tried several different filture to get the best result.| 0.561299| 0.580326|  0.401368| 0.191497 |
-   | Bells and whistle (2) The improvement of NMS in all directions. Instead of comparing with the 4 neighbour pixels, or the eight neighbor pixels, I also introduce the alpha here, so that we can have the accuracy to 360 degrees rather than 45 degrees, which can generate more accurate results for comparing. For instance: it can be the combinayion of both pixel [i + 1, j + 1] and pixel [i, j + 1] ) | 0.576145  | 0.599183  | 0.379651  |0.288801 |
-   | Bells and whistle (n) difference start filter. The original filter is the [−1, 0, 1] after GaussianBlur. However, we can change it into np.array([[-1,0, 1],[-4,0,4],[-1,0,1]], np.array([[-1,0, 1],[-3,0,3],[-1,0,1]]) or np.array([[-3,0, 3],[-10,0,10],[-3,0,3]], so that we can find out the differences between colors more clear. I tried several different filture to get the best result.  | 0.611799|0.633582 | 0.605676| 0.9 |
+   | Best base Implementation (from above) | 0.611799|0.633582 | 0.605676| 2.106341 |
+   | Bells and whistle (1) The fuunction cv2.GaussianBlur()) can help us to get better  smoothing. At the beginning, I tried the convolve2d(I, gaussian_kernel, mode='same') for the blur, but the cv2.GaussianBlur() generate better results. Also, we can adjust the number in the GaussianBlur. I tried several different filture to get the best result. Finally, I choose I = cv2.GaussianBlur(I, (7,7),2) as the best Gaussian parameter| 0.605989  | 0.619656  | 0.571090  | 0.019512|
+   | Bells and whistle (2) The improvement of NMS in all directions. Instead of comparing with the 4 neighbour pixels, or the eight neighbor pixels, I also introduce the alpha here, so that we can have the accuracy to 360 degrees rather than 45 degrees, which can generate more accurate results for comparing. For instance: it can be the combinayion of both pixel [i + 1, j + 1] and pixel [i, j + 1] ) | 0.610538|0.632524 | 0.603645| 2.103400 |
+   | Bells and whistle (n) difference start filter. The original filter is the [−1, 0, 1] after GaussianBlur. However, we can change it into np.array([[-1,0, 1],[-4,0,4],[-1,0,1]], np.array([[-1,0, 1],[-3,0,3],[-1,0,1]]) or np.array([[-3,0, 3],[-10,0,10],[-3,0,3]], so that we can find out the differences between colors more clear. I tried several different filture to get the best result.  | 0.611799|0.633582 | 0.605676| 2.106341 |
