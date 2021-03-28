@@ -45,9 +45,6 @@ def compute_corners1(I): #1 original
 
 
 def compute_corners2(image): # No NMS
-
-
-
   #the variables we might change 
   alpha = 0.05
   # kernal_size = (3,3)
@@ -160,7 +157,7 @@ def compute_corners4(image): # 4 best
 
 
 #Bells and Whistles
-def compute_corners(image): # 4 
+def compute_corners5(image): # 4 
 
   #the variables we might change 
   alpha = 0.05
@@ -219,3 +216,73 @@ def compute_corners(image): # 4
   return response, corners
 
 
+## bells and whistle (1)
+def compute_corners(I):
+  # Currently this code proudces a dummy corners and a dummy corner response
+  # map, just to illustrate how the code works. Your task will be to fill this
+  # in with code that actually implements the Harris corner detector. You
+  # should return th ecorner response map, and the non-max suppressed corners.
+  # Input:
+  #   I: input image, H x W x 3 BGR image
+  # Output:
+  #   response: H x W response map in uint8 format
+  #   corners: H x W map in uint8 format _after_ non-max suppression. Each
+  #   pixel stores the score for being a corner. Non-max suppressed pixels
+  #   should have a low / zero-score.
+  # Inew = I[:, :, 0] * 0.2126 + I[:, :, 1] * 0.7152 + I[:, :, 2] * 0.0722
+  Inew = I[:, :, 0] * 0.2989 + I[:, :, 1] * 0.5870 + I[:, :, 2] * 0.1140
+
+  Inew = Inew.astype(np.float32)
+  Ix = signal.convolve2d(Inew, np.array([[-1, 0, 1]]), mode='same', boundary='symm')
+  Iy = signal.convolve2d(Inew, np.array([[-1, 0, 1]]).T, mode='same', boundary='symm')
+
+  Ixx = scipy.ndimage.gaussian_filter(Ix ** 2, sigma = 1)
+  Ixy = scipy.ndimage.gaussian_filter(Ix * Iy, sigma = 1)
+  Iyy = scipy.ndimage.gaussian_filter(Iy ** 2, sigma = 1)
+  alpha = 0.05
+  det = Ixx * Iyy - Ixy ** 2
+  trace = Ixx + Iyy
+  R = det - alpha * trace ** 2
+
+  corners = np.zeros(Inew.shape)
+
+
+  for i in range(R.shape[0]):
+    for j in range(R.shape[1]):
+      if (R[i, j] > 0): 
+        corners[i, j] = R[i, j]
+        
+## add nms
+  corners_new = np.zeros(corners.shape)
+  for i in range(R.shape[0]):
+    for j in range(R.shape[1]):
+      needKeep = True
+      # for k in range(i - 1, i + 2):
+      #   for l in range(j - 1, j + 2):
+      for k in range(i - 2, i + 3):
+        for l in range(j - 2, j + 3):
+      # for k in range(i - 3, i + 4):
+      #   for l in range(j - 3, j + 4):
+          if k < 0 or k >= R.shape[0] or l < 0 or l >= R.shape[1]:
+            continue
+          if k == i and l == j:
+            continue
+          if corners[i, j] < corners[k, l]:
+            needKeep = False
+      if needKeep:
+        corners_new[i][j] = corners[i][j]
+  corners = corners_new
+## end nms
+
+  corners = (corners) / (np.max(corners))
+  corners = corners * 255.
+  corners = np.clip(corners, 1, 255)
+  corners = corners.astype(np.uint8)
+
+
+  response = R
+  response = response / (np.max(response))
+  response = response * 225
+  response = np.clip(response, 0, 255)
+  response = response.astype(np.uint8)
+  return response, corners
